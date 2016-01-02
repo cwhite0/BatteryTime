@@ -1,0 +1,29 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "ClockWhite",
+    "longName": "BatteryTime",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "compatibility": "2.7",
+                "file": "fonts/perfect-dos-vga.ttf",
+                "name": "FONT_PERFECT_DOS_48",
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "BatteryTime",
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "uuid": "27e4fa7e-e555-416f-8845-3fc6634109d7",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
