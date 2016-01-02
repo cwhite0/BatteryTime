@@ -4,6 +4,7 @@ static Window *s_main_window;
 static TextLayer *s_time_layer;
 static TextLayer *s_date_layer;
 static TextLayer *s_dayOfWeek_layer;
+static TextLayer *s_percent_layer;
 
 static GFont s_time_font;
 static GFont s_date_font;
@@ -20,6 +21,7 @@ static void update_time() {
   static char s_buffer[8];
   static char date_buffer[16];
   static char day_buffer[16];
+  static char percent_buffer[8];
 
   strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ?
                                           "%H:%M" : "%I:%M", tick_time);
@@ -38,6 +40,9 @@ static void update_time() {
   text_layer_set_text(s_dayOfWeek_layer, day_buffer);
   
   BatteryChargeState charge_state = battery_state_service_peek();
+  snprintf (percent_buffer, sizeof(percent_buffer), "%d%%", charge_state.charge_percent);
+  text_layer_set_text(s_percent_layer, percent_buffer);   
+ 
  if (charge_state.is_charging) {
    text_layer_set_text_color(s_time_layer, GColorVividCerulean);
  } else if (charge_state.charge_percent < 10) {
@@ -62,13 +67,13 @@ static void main_window_load(Window *window) {
 
   // Create the TextLayer with specific bounds
   s_time_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(58, 52), bounds.size.w-20, 50));
+      GRect(0, PBL_IF_ROUND_ELSE(58, 52), bounds.size.w, 50));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_text(s_time_layer, "00:00");
-  text_layer_set_text_alignment(s_time_layer, GTextAlignmentRight);
+  text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
   
   // Create Date Layer
   s_date_layer = text_layer_create(
@@ -89,13 +94,21 @@ static void main_window_load(Window *window) {
   text_layer_set_text(s_dayOfWeek_layer, "Someday");
   text_layer_set_text_alignment(s_dayOfWeek_layer, GTextAlignmentRight);
 
+  s_percent_layer = text_layer_create(
+    GRect(0, PBL_IF_ROUND_ELSE(150, 150), bounds.size.w - 20, 30));
+
+  // Style te text
+  text_layer_set_background_color(s_percent_layer, GColorClear);
+  text_layer_set_text_color(s_percent_layer, GColorPictonBlue);
+  text_layer_set_text_alignment(s_percent_layer, GTextAlignmentRight);
+  text_layer_set_text(s_percent_layer, "0%");
 
   // Create GFont
   s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_48));
   //fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD);
   s_date_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_24));
   s_dayOfTheWeek_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_18));
-  s_percent_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_18));
+  s_percent_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_12));
 
 
   // Apply to TextLayer
@@ -103,6 +116,7 @@ static void main_window_load(Window *window) {
   
   // Apply to DateLayer
   text_layer_set_font(s_date_layer, s_date_font);
+  text_layer_set_font(s_percent_layer, s_percent_font);
   
   // Apply DateOfTheWeek
   text_layer_set_font(s_dayOfWeek_layer, s_dayOfTheWeek_font);
@@ -114,6 +128,8 @@ static void main_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
     // Add it as a child layer to the Window's root layer
   layer_add_child(window_layer, text_layer_get_layer(s_dayOfWeek_layer));
+  layer_add_child(window_layer, text_layer_get_layer(s_percent_layer));
+  
 }
 
 static void main_window_unload(Window *window) {
@@ -121,6 +137,7 @@ static void main_window_unload(Window *window) {
   text_layer_destroy(s_time_layer);
   text_layer_destroy(s_date_layer);
   text_layer_destroy(s_dayOfWeek_layer);
+  text_layer_destroy(s_percent_layer);
 
  // Unload GFont
   fonts_unload_custom_font(s_time_font);
