@@ -9,9 +9,43 @@
     "resources": {
         "media": [
             {
+                "file": "images/download.png",
+                "name": "FACEIMAGE",
+                "targetPlatforms": null,
+                "type": "png"
+            },
+            {
+                "characterRegex": "[0-9:A-Za-z ]",
+                "file": "fonts/GlacialIndifference.ttf",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_12",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-9:A-Za-z ]",
+                "file": "fonts/GlacialIndifference.ttf",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_18",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
                 "characterRegex": "[0-9:A-Za-z ]",
                 "file": "fonts/GlacialIndifference.ttf",
                 "name": "FONT_GLACIALINDIFFERENCE_REGULAR_48",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-9:A-Za-z ]",
+                "file": "fonts/GlacialIndifference.ttf",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_36",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-9:A-Za-z ]",
+                "file": "fonts/GlacialIndifference.ttf",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_24",
                 "targetPlatforms": null,
                 "type": "font"
             }
@@ -25,6 +59,6 @@
     "uuid": "27e4fa7e-e555-416f-8845-3fc6634109d7",
     "versionLabel": "1.0",
     "watchapp": {
-        "watchface": false
+        "watchface": true
     }
 }
