@@ -76,7 +76,7 @@ static void main_window_load(Window *window) {
 
   // Style te text
   text_layer_set_background_color(s_date_layer, GColorClear);
-  text_layer_set_text_color(s_date_layer, GColorVividCerulean);
+  text_layer_set_text_color(s_date_layer, GColorPictonBlue);
   text_layer_set_text_alignment(s_date_layer, GTextAlignmentRight);
   text_layer_set_text(s_date_layer, "Loading...");
   
@@ -85,7 +85,7 @@ static void main_window_load(Window *window) {
     GRect(0, PBL_IF_ROUND_ELSE(40, 40), bounds.size.w - 20, 30));
    // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_dayOfWeek_layer, GColorClear);
-  text_layer_set_text_color(s_dayOfWeek_layer, GColorVividCerulean);
+  text_layer_set_text_color(s_dayOfWeek_layer, GColorPictonBlue);
   text_layer_set_text(s_dayOfWeek_layer, "Someday");
   text_layer_set_text_alignment(s_dayOfWeek_layer, GTextAlignmentRight);
 
