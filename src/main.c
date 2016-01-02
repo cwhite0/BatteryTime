@@ -29,8 +29,7 @@ static void update_time() {
   strftime(date_buffer, sizeof(date_buffer), 
                                           "%B %e", tick_time);
   
-  strftime(day_buffer, sizeof(day_buffer), 
-                                          "%A", tick_time);
+  strftime(day_buffer, sizeof(day_buffer), "%A", tick_time);
   
     
 
@@ -45,14 +44,19 @@ static void update_time() {
  
  if (charge_state.is_charging) {
    text_layer_set_text_color(s_time_layer, GColorVividCerulean);
- } else if (charge_state.charge_percent < 10) {
+   text_layer_set_text_color(s_percent_layer, GColorVividCerulean); 
+ } else if (charge_state.charge_percent < 11) {
   text_layer_set_text_color(s_time_layer, GColorMelon);
- } else if (charge_state.charge_percent < 30) {
+   text_layer_set_text_color(s_percent_layer, GColorMelon); 
+ } else if (charge_state.charge_percent < 31) {
     text_layer_set_text_color(s_time_layer, GColorRajah);
+    text_layer_set_text_color(s_percent_layer, GColorRajah); 
  } else if (charge_state.charge_percent < 101) {
     text_layer_set_text_color(s_time_layer, GColorWhite);
+    text_layer_set_text_color(s_percent_layer, GColorBlack); 
  } else {
     text_layer_set_text_color(s_time_layer, GColorLavenderIndigo);
+   text_layer_set_text_color(s_percent_layer, GColorLavenderIndigo); 
  }
 }
 
@@ -168,7 +172,7 @@ static void init() {
   update_time();
 
   // Register with TickTimerService
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+  tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
 }
 
 static void deinit() {
