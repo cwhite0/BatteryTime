@@ -9,9 +9,10 @@
     "resources": {
         "media": [
             {
-                "compatibility": "2.7",
-                "file": "fonts/perfect-dos-vga.ttf",
-                "name": "FONT_PERFECT_DOS_48",
+                "characterRegex": "[0-9:A-Za-z ]",
+                "file": "fonts/GlacialIndifference.ttf",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_48",
+                "targetPlatforms": null,
                 "type": "font"
             }
         ]
@@ -24,6 +25,6 @@
     "uuid": "27e4fa7e-e555-416f-8845-3fc6634109d7",
     "versionLabel": "1.0",
     "watchapp": {
-        "watchface": true
+        "watchface": false
     }
 }

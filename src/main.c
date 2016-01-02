@@ -32,7 +32,7 @@ static void update_time() {
  } else if (charge_state.charge_percent < 101) {
     text_layer_set_text_color(s_time_layer, GColorWhite);
  } else {
-    text_layer_set_text_color(s_time_layer, GColorLavenderIndigo);https://cloudpebble.net/ide/
+    text_layer_set_text_color(s_time_layer, GColorLavenderIndigo);
  }
 }
 
@@ -57,7 +57,7 @@ static void main_window_load(Window *window) {
 
   // Create the TextLayer with specific bounds
   s_time_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(58, 52), bounds.size.w, 50));
+      GRect(0, PBL_IF_ROUND_ELSE(58, 52), bounds.size.w, 100));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_time_layer, GColorClear);
@@ -66,7 +66,8 @@ static void main_window_load(Window *window) {
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
 
   // Create GFont
-  s_time_font = fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD);
+  s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_48));
+  //fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD);
 
   // Apply to TextLayer
   text_layer_set_font(s_time_layer, s_time_font);
