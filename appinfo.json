@@ -4,6 +4,7 @@
         ""
     ],
     "companyName": "ClockWhite",
+    "enableMultiJS": false,
     "longName": "BatteryTime",
     "projectType": "native",
     "resources": {
