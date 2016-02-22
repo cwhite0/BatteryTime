@@ -1,7 +1,7 @@
 {
     "appKeys": {},
     "capabilities": [
-        ""
+        "health"
     ],
     "companyName": "ClockWhite",
     "enableMultiJS": false,
@@ -16,16 +16,37 @@
                 "type": "png"
             },
             {
-                "characterRegex": "[0-9:A-Za-z ]",
+                "characterRegex": "[0-9:%A-Za-z ]",
                 "file": "fonts/GlacialIndifference.ttf",
-                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_24",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_22",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-9:%A-Za-z ]",
+                "file": "fonts/GlacialIndifference.ttf",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_20",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-9:%A-Za-z ]",
+                "file": "fonts/GlacialIndifference.ttf",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_16",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-9:%A-Za-z ]",
+                "file": "fonts/GlacialIndifference.ttf",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_12",
                 "targetPlatforms": null,
                 "type": "font"
             },
             {
                 "characterRegex": "[0-9:A-Za-z ]",
                 "file": "fonts/GlacialIndifference.ttf",
-                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_36",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_18",
                 "targetPlatforms": null,
                 "type": "font"
             },
@@ -39,14 +60,14 @@
             {
                 "characterRegex": "[0-9:A-Za-z ]",
                 "file": "fonts/GlacialIndifference.ttf",
-                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_18",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_36",
                 "targetPlatforms": null,
                 "type": "font"
             },
             {
-                "characterRegex": "[0-9:%A-Za-z ]",
+                "characterRegex": "[0-9:A-Za-z ]",
                 "file": "fonts/GlacialIndifference.ttf",
-                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_12",
+                "name": "FONT_GLACIALINDIFFERENCE_REGULAR_24",
                 "targetPlatforms": null,
                 "type": "font"
             }

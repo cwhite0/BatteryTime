@@ -137,7 +137,7 @@ static void main_window_load(Window *window) {
   // Create GFont
   s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_48));
   //fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD);
-  s_date_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_24));
+  s_date_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_22));
   s_dayOfTheWeek_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_18));
   s_percent_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_12));
   s_step_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GLACIALINDIFFERENCE_REGULAR_18));
@@ -185,10 +185,19 @@ static void main_window_unload(Window *window) {
 
 }
 
-static void tap_handler(AccelAxisType axis, int32_t direction) {
+static void showExtras() {
  text_layer_set_text_color(s_step_layer, GColorWhite);
  text_layer_set_text_color(s_percent_layer, GColorWhite); 
 }
+
+
+static void tap_handler(AccelAxisType axis, int32_t direction) {
+ showExtras();
+}
+
+
+
+
 
 static void init() {
   // Create main Window element and assign to pointer
@@ -203,6 +212,7 @@ static void init() {
     .unload = main_window_unload
   });
 
+  
   // Show the Window on the watch, with animated=true
   window_stack_push(s_main_window, true);
 
@@ -213,13 +223,17 @@ static void init() {
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
   // Tap handler
   accel_tap_service_subscribe(tap_handler);
+  //window_set_click_config_provider(s_main_window, (ClickConfigProvider) config_provider);
 
 }
+
+
 
 static void deinit() {
   // Destroy Window
   window_destroy(s_main_window);
- accel_tap_service_unsubscribe();
+  accel_tap_service_unsubscribe();
+  tick_timer_service_unsubscribe();
 
 }
 
