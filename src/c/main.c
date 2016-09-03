@@ -35,7 +35,13 @@ static void update_time() {
   
   strftime(day_buffer, sizeof(day_buffer), "%A", tick_time);
   
-    
+  
+ if (sizeof(date_buffer) > 10) {
+   text_layer_set_font(s_date_layer,s_dayOfTheWeek_font);
+ } else {
+   
+   text_layer_set_font(s_date_layer,s_date_font);
+ }
 
   // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, s_buffer);
@@ -60,22 +66,30 @@ static void update_time() {
     text_layer_set_text(s_step_layer, step_buffer);   
 
   } 
+  
+
+
  
  if (charge_state.is_charging) {
+  window_set_background_color(s_main_window, GColorBlack);
    text_layer_set_text_color(s_time_layer, GColorVividCerulean);
  } else if (charge_state.charge_percent < 11) {
-  text_layer_set_text_color(s_time_layer, GColorMelon);
- } else if (charge_state.charge_percent < 31) {
-    text_layer_set_text_color(s_time_layer, GColorRajah);
- } else if (charge_state.charge_percent < 101) {
+   window_set_background_color(s_main_window, GColorDarkCandyAppleRed);
     text_layer_set_text_color(s_time_layer, GColorWhite);
- } else {
-    text_layer_set_text_color(s_time_layer, GColorLavenderIndigo);
+ } else if (charge_state.charge_percent < 21) {
+   window_set_background_color(s_main_window, GColorBulgarianRose);
+    text_layer_set_text_color(s_time_layer, GColorWhite);
+ } else if (charge_state.charge_percent < 101) {
+   
+    window_set_background_color(s_main_window, GColorBlack);
+    text_layer_set_text_color(s_time_layer, GColorWhite);
 
+ } else {
+    window_set_background_color(s_main_window, GColorDarkCandyAppleRed);
+    text_layer_set_text_color(s_time_layer, GColorLavenderIndigo);
  }
  text_layer_set_text_color(s_step_layer, GColorClear);
  text_layer_set_text_color(s_percent_layer, GColorClear); 
-  
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
