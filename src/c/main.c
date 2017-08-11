@@ -25,6 +25,7 @@ static void update_time() {
   static char date_buffer[16];
   static char day_buffer[16];
   static char percent_buffer[8];
+  
   static char step_buffer[16];
 
   strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ?
@@ -63,33 +64,56 @@ static void update_time() {
   if(mask & HealthServiceAccessibilityMaskAvailable) {
     // Data is available!
      snprintf (step_buffer, sizeof(step_buffer), "%d", (int)health_service_sum_today(metric));
-    text_layer_set_text(s_step_layer, step_buffer);   
+    text_layer_set_text(s_step_layer, step_buffer);  
+    
 
   } 
+      time_t start_time = end - 60;
+  HealthServiceAccessibilityMask hr = health_service_metric_accessible(HealthMetricHeartRateBPM, start_time, end);
+  
+if (watch_info_get_model()==WATCH_INFO_MODEL_PEBBLE_2_HR && hr & HealthServiceAccessibilityMaskAvailable) {
+  
+       uint32_t avg_hr = health_service_aggregate_averaged(HealthMetricHeartRateBPM,
+                              start_time, end,
+                              HealthAggregationAvg, HealthServiceTimeScopeOnce);
+        if (avg_hr > 0) {
+          static char hr_buffer[20];
+          snprintf (hr_buffer, sizeof(hr_buffer), "%s - %d bpm", step_buffer, (int) avg_hr);
+          text_layer_set_text(s_step_layer, hr_buffer);
+        }
+}
   
 
 
  
  if (charge_state.is_charging) {
-  window_set_background_color(s_main_window, GColorBlack);
+   window_set_background_color(s_main_window, GColorBlack);
    text_layer_set_text_color(s_time_layer, GColorVividCerulean);
+    text_layer_set_text_color(s_step_layer, GColorBlack);
+   text_layer_set_text_color(s_percent_layer, GColorBlack); 
  } else if (charge_state.charge_percent < 11) {
    window_set_background_color(s_main_window, GColorDarkCandyAppleRed);
     text_layer_set_text_color(s_time_layer, GColorWhite);
+    text_layer_set_text_color(s_step_layer, GColorDarkCandyAppleRed);
+    text_layer_set_text_color(s_percent_layer, GColorDarkCandyAppleRed); 
  } else if (charge_state.charge_percent < 21) {
    window_set_background_color(s_main_window, GColorBulgarianRose);
     text_layer_set_text_color(s_time_layer, GColorWhite);
+    text_layer_set_text_color(s_step_layer, GColorBulgarianRose);
+    text_layer_set_text_color(s_percent_layer, GColorBulgarianRose); 
  } else if (charge_state.charge_percent < 101) {
    
     window_set_background_color(s_main_window, GColorBlack);
     text_layer_set_text_color(s_time_layer, GColorWhite);
+    text_layer_set_text_color(s_step_layer, GColorBlack);
+    text_layer_set_text_color(s_percent_layer, GColorBlack); 
 
  } else {
     window_set_background_color(s_main_window, GColorDarkCandyAppleRed);
     text_layer_set_text_color(s_time_layer, GColorLavenderIndigo);
+    text_layer_set_text_color(s_step_layer, GColorDarkCandyAppleRed);
+    text_layer_set_text_color(s_percent_layer, GColorDarkCandyAppleRed); 
  }
- text_layer_set_text_color(s_step_layer, GColorClear);
- text_layer_set_text_color(s_percent_layer, GColorClear); 
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
